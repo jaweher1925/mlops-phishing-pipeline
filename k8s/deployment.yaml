@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: phishing-classifier
+  labels:
+    app: phishing-classifier
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: phishing-classifier
+  template:
+    metadata:
+      labels:
+        app: phishing-classifier
+    spec:
+      containers:
+      - name: phishing-classifier
+        image: phishing-classifier:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8000
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
