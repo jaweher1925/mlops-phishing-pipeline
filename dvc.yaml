@@ -1,0 +1,12 @@
+stages:
+  preprocess:
+    cmd: python src/preprocess.py
+    deps:
+      - src/preprocess.py
+      - data/raw/AVN_Basic.csv
+      - params.yaml
+    params:
+      - data
+    outs:
+      - data/processed/train.csv
+      - data/processed/test.csv

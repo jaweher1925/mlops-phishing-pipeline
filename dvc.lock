@@ -1,0 +1,33 @@
+schema: '2.0'
+stages:
+  preprocess:
+    cmd: python src/preprocess.py
+    deps:
+    - path: data/raw/AVN_Basic.csv
+      hash: md5
+      md5: e48f45c3b0e2e60b7023effaf9f3627d
+      size: 93660514
+    - path: params.yaml
+      hash: md5
+      md5: 708ee3282385e8222ec6de11a704309f
+      size: 313
+    - path: src/preprocess.py
+      hash: md5
+      md5: 32c90cec7ac1d7ebf35015d97dab8bd2
+      size: 2037
+    params:
+      params.yaml:
+        data:
+          raw_path: data/raw/AVN_Basic.csv
+          processed_path: data/processed/
+          test_size: 0.2
+          random_state: 42
+    outs:
+    - path: data/processed/test.csv
+      hash: md5
+      md5: 678c346ed3722232527302f826fe6602
+      size: 13139234
+    - path: data/processed/train.csv
+      hash: md5
+      md5: 81e290f0ba9015071b5f11595f7ba214
+      size: 50516232

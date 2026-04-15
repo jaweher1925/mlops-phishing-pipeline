@@ -1,0 +1,18 @@
+data:
+  raw_path: data/raw/AVN_Basic.csv
+  processed_path: data/processed/
+  test_size: 0.2
+  random_state: 42
+
+features:
+  max_features: 5000
+
+models:
+  logistic_regression:
+    C: 1.0
+    max_iter: 1000
+  random_forest:
+    n_estimators: 100
+    max_depth: 10
+  decision_tree:
+    max_depth: 10
