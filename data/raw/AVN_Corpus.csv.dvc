@@ -1,0 +1,5 @@
+outs:
+- md5: a3e49da50c56880eeb9f95d107149ece
+  size: 93095328
+  hash: md5
+  path: AVN_Corpus.csv
