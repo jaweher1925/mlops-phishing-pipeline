@@ -31,3 +31,48 @@ stages:
       hash: md5
       md5: 81e290f0ba9015071b5f11595f7ba214
       size: 50516232
+  train:
+    cmd: python src/train.py
+    deps:
+    - path: data/processed/test.csv
+      hash: md5
+      md5: 678c346ed3722232527302f826fe6602
+      size: 13139234
+    - path: data/processed/train.csv
+      hash: md5
+      md5: 81e290f0ba9015071b5f11595f7ba214
+      size: 50516232
+    - path: params.yaml
+      hash: md5
+      md5: 708ee3282385e8222ec6de11a704309f
+      size: 313
+    - path: src/train.py
+      hash: md5
+      md5: 90ef48439531247a5cbeb42fb94daccc
+      size: 4046
+    params:
+      params.yaml:
+        features:
+          max_features: 5000
+        models:
+          logistic_regression:
+            C: 1.0
+            max_iter: 1000
+          random_forest:
+            n_estimators: 100
+            max_depth: 10
+          decision_tree:
+            max_depth: 10
+    outs:
+    - path: models/champion_model.pkl
+      hash: md5
+      md5: c3f21eafb8aa213d655726bd0f6eadce
+      size: 40670
+    - path: models/champion_name.txt
+      hash: md5
+      md5: 208a3622aebef26324d64e14e183a6e9
+      size: 19
+    - path: models/vectorizer.pkl
+      hash: md5
+      md5: 6e315010e06f92a0ec462a260bda9cf4
+      size: 183698

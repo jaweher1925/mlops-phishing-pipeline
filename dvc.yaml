@@ -10,3 +10,18 @@ stages:
     outs:
       - data/processed/train.csv
       - data/processed/test.csv
+
+  train:
+    cmd: python src/train.py
+    deps:
+      - src/train.py
+      - data/processed/train.csv
+      - data/processed/test.csv
+      - params.yaml
+    params:
+      - models
+      - features
+    outs:
+      - models/vectorizer.pkl
+      - models/champion_model.pkl
+      - models/champion_name.txt
