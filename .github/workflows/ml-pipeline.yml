@@ -1,0 +1,51 @@
+name: MLOps Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  ml-pipeline:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements-docker.txt
+          pip install dvc scikit-learn pandas numpy pyyaml mlflow
+
+      - name: Run preprocessing
+        run: |
+          python src/preprocess.py
+
+      - name: Train models
+        run: |
+          python src/train.py
+
+      - name: Verify champion model exists
+        run: |
+          ls -la models/
+          cat models/champion_name.txt
+
+      - name: Build Docker image
+        run: |
+          docker build -t phishing-classifier .
+
+      - name: Test Docker container
+        run: |
+          docker run -d -p 8000:8000 --name phishing-api phishing-classifier
+          sleep 5
+          curl http://localhost:8000/
+          curl -X POST http://localhost:8000/predict \
+            -H "Content-Type: application/json" \
+            -d '{"subject": "Urgent", "body": "Click here to verify your account"}'
+          docker stop phishing-api
